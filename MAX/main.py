@@ -13,6 +13,9 @@ with sr.Microphone() as source:
 try:
     text = r.recognize_google(audio)
     print("You said:", text)
-    
+
 except sr.UnknownValueError:
     print("Sorry, I could not understand the audio.")
+
+#hope this shows up in git
+
