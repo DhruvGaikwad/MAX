@@ -4,18 +4,24 @@ import speech_recognition as sr
 r = sr.Recognizer()
 
 # Use microphone as source
-with sr.Microphone() as source:
+with sr.Microphone() as source: 
     print("Say something...")
-    r.adjust_for_ambient_noise(source) 
-    audio = r.listen(source) 
 
+    while True:
+        r.adjust_for_ambient_noise(source)
+        print("Listening...")
+        audio = r.listen(source)
 
-try:
-    text = r.recognize_google(audio)
-    print("You said:", text)
+        try:
+            text = r.recognize_google(audio)
+            print("You said:", text)
+            
+        except sr.UnknownValueError:
+            print("Sorry, I could not understand the audio.")
+            continue
 
-except sr.UnknownValueError:
-    print("Sorry, I could not understand the audio.")
+        if text.lower() == "exit":
+            print("Exiting...")
+            break
 
-#hope this shows up in git
-
+# hope this shows up in git
