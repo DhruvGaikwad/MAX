@@ -7,11 +7,28 @@ r = sr.Recognizer()
 
 # Use microphone as source
 with sr.Microphone() as source: 
+    r.adjust_for_ambient_noise(source)
+
     while True:
+        try:
          print("Say something...")
-         r.adjust_for_ambient_noise(source)
          listener = r.listen(source)
-         audio = r.recognize_google(listener)
+         aud = r.recognize_google(listener)
+         audio = aud.lower()
          print(audio)
+         
+         if "google" in audio:
+            print("enter your query here")
+            time.sleep(1)
+            r.pause_threshold = 1x
+            googie= r.listen(source)  # reuse the same source
+            a = r.recognize_google(googie)
+            
+            for j in search(a, num_results=1):
+                wb.open(j)
+                
+        except sr.UnknownValueError:
+            print("Could not understand audio")
+        
 
 # hope this shows up in git
